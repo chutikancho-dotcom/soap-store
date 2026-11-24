@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "sku": "SOAP001",
+      "name": "สบู่สมุนไพรขมิ้น",
+      "description": "สบู่ทำความสะอาดผิว สูตรขมิ้น (ข้อมูลตัวอย่าง)",
+      "price": 59,
+      "stock": 30,
+      "image": "/images/turmeric-soap.svg"
+    },
+    {
+      "sku": "SOAP002",
+      "name": "สบู่น้ำนมข้าว",
+      "description": "สบู่ทำความสะอาดผิว สูตรน้ำนมข้าว (ข้อมูลตัวอย่าง)",
+      "price": 69,
+      "stock": 25,
+      "image": "/images/rice-milk-soap.svg"
+    }
+  ]
+}

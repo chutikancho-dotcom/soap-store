@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>บ้านสบู่ | สบู่ธรรมชาติ</title><link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header><div class="brand">บ้านสบู่<span>SOAP STUDIO</span></div><nav><a href="#products">สินค้า</a><a href="#order">สั่งซื้อ</a></nav></header>
+<section class="hero"><div><p class="eyebrow">EVERYDAY CARE • SIMPLE & GENTLE</p><h1>ดูแลผิวในทุกวัน<br>ด้วยสบู่ก้อนโปรด</h1><p>เลือกสบู่ที่ชอบ แล้วสั่งซื้อได้ง่าย ๆ ในไม่กี่ขั้นตอน</p><a class="button" href="#products">เลือกชมสินค้า</a></div><div class="hero-art">SOAP<br><small>made for everyday</small></div></section>
+<main>
+<section id="products"><div class="section-title"><p class="eyebrow">OUR PRODUCTS</p><h2>สินค้าของเรา</h2><p>มีสินค้าให้เลือกอย่างน้อย 2 SKU</p></div><div id="productGrid" class="grid"></div></section>
+<section id="order" class="order-section"><div><p class="eyebrow">CHECKOUT</p><h2>ข้อมูลจัดส่ง</h2><p>ตรวจสอบรายการสินค้าและกรอกข้อมูลสำหรับจัดส่งให้ครบถ้วน</p><div id="cart"></div></div>
+<form id="checkoutForm">
+<label>ชื่อผู้รับ<input name="name" required placeholder="ชื่อ-นามสกุล"></label>
+<label>เบอร์โทรศัพท์<input name="phone" required inputmode="tel" pattern="[0-9]{9,10}" placeholder="08xxxxxxxx"></label>
+<label>ที่อยู่จัดส่ง<textarea name="address" required rows="4" placeholder="บ้านเลขที่ ถนน แขวง/ตำบล เขต/อำเภอ จังหวัด รหัสไปรษณีย์"></textarea></label>
+<button class="button" type="submit">ยืนยันคำสั่งซื้อ</button><p class="note">* เว็บไซต์นี้เป็นตัวอย่างเพื่อการเรียนรู้ ไม่ได้ตัดเงินจริงหรือส่งข้อมูลไปยังขนส่ง</p>
+</form></section>
+<div id="message" role="status"></div>
+</main><footer>บ้านสบู่ • ตัวอย่างเว็บไซต์ร้านค้าออนไลน์สำหรับการเรียน</footer>
+<script src="/app.js"></script>
+</body></html>

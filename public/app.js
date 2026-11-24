@@ -1,0 +1,12 @@
+let products=[];let cart={};
+const money=n=>new Intl.NumberFormat('th-TH',{style:'currency',currency:'THB',maximumFractionDigits:0}).format(n);
+async function init(){const r=await fetch('/data/products.json');const d=await r.json();products=d.products;renderProducts();renderCart();}
+function renderProducts(){document.querySelector('#productGrid').innerHTML=products.map(p=>`<article class="card"><img src="${p.image}" alt="${p.name}"><h3>${p.name}</h3><p class="muted">${p.description}</p><div class="price">${money(p.price)}</div><p class="stock">คงเหลือ ${p.stock} ชิ้น • SKU: ${p.sku}</p><button class="button" onclick="add('${p.sku}')">เพิ่มลงตะกร้า</button></article>`).join('');}
+function add(sku){const p=products.find(x=>x.sku===sku);if(cart[sku]>=p.stock){alert('สินค้าในสต็อกไม่เพียงพอ');return;}cart[sku]=(cart[sku]||0)+1;renderCart();}
+function renderCart(){const entries=Object.entries(cart).filter(([k,v])=>v>0);const total=entries.reduce((s,[k,v])=>s+products.find(p=>p.sku===k).price*v,0);document.querySelector('#cart').innerHTML=entries.length?entries.map(([k,v])=>{const p=products.find(x=>x.sku===k);return `<div class="cart-row"><span>${p.name} × ${v}</span><b>${money(p.price*v)}</b></div>`}).join('')+`<p><b>รวม ${money(total)}</b></p>`:'ยังไม่มีสินค้าในตะกร้า';}
+document.querySelector('#checkoutForm').addEventListener('submit',e=>{e.preventDefault();const entries=Object.entries(cart).filter(([k,v])=>v>0);if(!entries.length){alert('กรุณาเลือกสินค้าก่อน');return;}for(const [k,v] of entries){const p=products.find(x=>x.sku===k);if(v>p.stock){alert('สต็อกสินค้าไม่เพียงพอ');return;}}
+const f=new FormData(e.target);const total=entries.reduce((s,[k,v])=>s+products.find(p=>p.sku===k).price*v,0);
+const order={orderNo:'SOAP-'+Date.now().toString().slice(-7),customer:Object.fromEntries(f.entries()),items:entries.map(([k,v])=>({sku:k,name:products.find(p=>p.sku===k).name,qty:v})),total};
+const box=document.querySelector('#message');box.style.display='block';box.innerHTML=`<b>บันทึกคำสั่งซื้อเรียบร้อย (ตัวอย่าง)</b><br>เลขที่คำสั่งซื้อ: ${order.orderNo}<br>ยอดรวม: ${money(total)}<br>ผู้รับ: ${order.customer.name}<br>ที่อยู่: ${order.customer.address}<br><br>สำหรับการแพ็คสินค้า: ตรวจ SKU และจำนวนตามรายการข้างต้น จากนั้นเขียนชื่อ เบอร์โทร และที่อยู่ผู้รับบนใบปะหน้าพัสดุ`;
+console.log('ตัวอย่างคำสั่งซื้อ',order);cart={};renderCart();e.target.reset();box.scrollIntoView({behavior:'smooth'});});
+init();
